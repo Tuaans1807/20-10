@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thử thách âm nhạc - Tũn Hok Mặp 🐷</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Phần 1: Giới thiệu -->
+    <div id="intro-section" class="section active">
+        <div class="container">
+            <!-- Linh vật Tũn -->
+            <div class="mascot-intro">
+                <div class="pig-emoji">🐷</div>
+                <div class="speech-bubble intro-bubble">
+                    <div id="current-dialogue">
+                        <p id="dialogue-text">Xin chào Bạn</p>
+                    </div>
+                    
+                    <!-- Phần phản hồi của người chơi (ẩn ban đầu) -->
+                    <div id="player-response" class="hidden">
+                        <div class="player-bubble">
+                            <p id="player-text">Tôi chọn: </p>
+                        </div>
+                        <div class="response-options">
+                            <button class="response-btn" data-response="hello">Xin chào!</button>
+                            <button class="response-btn" data-response="excited">Rất vui được gặp!</button>
+                            <button class="response-btn" data-response="curious">Bạn là ai vậy?</button>
+                        </div>
+                    </div>
+                    
+                    <div class="dialogue-controls">
+                        <button id="next-dialogue" class="next-btn" style="z-index: 9999; position: relative;">Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hiệu ứng tim bay -->
+            <div id="hearts-container"></div>
+        </div>
+    </div>
+
+    <!-- Phần 2: Trò chơi âm nhạc -->
+    <div id="music-quiz-section" class="section">
+        <div class="container">
+            <!-- Câu hỏi âm nhạc -->
+            <div id="music-quiz-container">
+                <!-- Câu hỏi sẽ được tạo động bằng JavaScript -->
+            </div>
+
+            <!-- Hiệu ứng tim bay -->
+            <div id="hearts-container-quiz"></div>
+        </div>
+    </div>
+
+    <!-- Phần 3: Chúc mừng -->
+    <div id="congratulations-section" class="section">
+        <div class="container">
+            <div class="mascot-final">
+                <div class="pig-emoji">🐷</div>
+                <div class="speech-bubble final-bubble">
+                    <p>💕Chúc mừng bạn đã vượt qua thử thách💕</p>
+                    <p>Đây là món quà dành cho bạn trong ngày đặc biệt hôm nay tuy đơn giản nhưng hãy đón nhận nhéee 💕💕💕</p>
+                </div>
+            </div>
+
+            <!-- Phần câu hỏi cuối -->
+            <div id="final-questions">
+                <div class="question" id="final-question-1">
+                    <h2>Hôm nay là ngày gì taaaa? 🤔</h2>
+                    <div class="options">
+                        <button class="option-btn" data-answer="correct">20/10</button>
+                        <button class="option-btn" data-answer="wrong">14/2</button>
+                        <button class="option-btn" data-answer="wrong">8/3</button>
+                    </div>
+                </div>
+
+                <div class="question hidden" id="final-question-2">
+                    <h2>Ai là người xinh đẹp nhất của Tũn nhỉ? 💕</h2>
+                    <div class="options">
+                        <button class="option-btn" data-answer="correct">Kim húi chân</button>
+                        <button class="option-btn" data-answer="correct">Ebe húi</button>
+                        <button class="option-btn" data-answer="correct">Kim Húi</button>
+                    </div>
+                </div>
+
+                <div class="question hidden" id="final-question-3">
+                    <h2>Muốn biết có gì tiếp theo thì hãy click vào đây 😚</h2>
+                    <div class="options">
+                        <button class="option-btn special-btn" id="final-button">
+                            Tũn đẹp troai vãi chưởnggg 💪🐷
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Hiệu ứng trái tim bay -->
+            <div id="floating-hearts"></div>
+        </div>
+    </div>
+
+    <!-- Phần 4: Lời chúc cuối -->
+    <div id="final-wish-section" class="section">
+        <div class="container">
+            <h1 class="main-title">Chúc Cô bé nì ngày 20/10 thật vui vẻ và hạnh phúc ❤️</h1>
+            
+            <div class="typing-text">
+                <span id="typing-text">Mãi xinkk đẹp , dễ thương và đáng iu như vậy nhóoo 💖</span>
+            </div>
+
+            <!-- Container cho hình ảnh -->
+            <div id="images-container">
+                <!-- Hình ảnh sẽ được thêm động bằng JavaScript -->
+            </div>
+
+            <!-- Hiệu ứng trái tim bay -->
+            <div id="floating-hearts-final"></div>
+        </div>
+    </div>
+
+    <!-- Audio cho nhạc nền (MP3 cục bộ) -->
+    <audio id="background-music" loop preload="auto">
+        <source src="assets/audio/bgm.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Fallback YouTube (ẩn) -->
+    <div id="yt-holder" style="width:1px;height:1px;overflow:hidden;">
+        <div id="yt-player"></div>
+    </div>
+
+    <!-- Lựa chọn nhân vật - Độc lập -->
+    <div id="character-selection" class="hidden">
+        <h2>Chọn người may mắn của bạn:</h2>
+        <div class="character-options">
+            <div class="character-card" data-character="kim-min-tun">
+                <img src="images/characters/Kim Min Tũn.png" alt="Kim Min Tũn" class="character-image">
+                <h3>Kim Min Tũn</h3>
+            </div>
+            <div class="character-card" data-character="mingyu">
+                <img src="images/characters/Mingyu.jpg" alt="Mingyu" class="character-image">
+                <h3>Mingyu</h3>
+            </div>
+            <div class="character-card" data-character="hoshi">
+                <img src="images/characters/Hoshi.jpg" alt="Hoshi" class="character-image">
+                <h3>Hoshi</h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>

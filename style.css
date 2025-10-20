@@ -1,0 +1,823 @@
+/* Reset và cài đặt cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Container chính */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Phần sections */
+.section {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+}
+
+.section.active {
+    display: block;
+}
+
+/* ===== PHẦN 1: GIỚI THIỆU ===== */
+
+/* Linh vật mũm mĩm */
+.mascot-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: bounce 2s infinite;
+}
+
+.mascot-final {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: bounce 2s infinite;
+}
+
+.pig-emoji {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.speech-bubble {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+}
+
+.speech-bubble p {
+    margin: 5px 0;
+    color: #d63384;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: opacity 0.5s ease;
+}
+
+/* Bubble giới thiệu */
+.intro-bubble {
+    max-width: 500px;
+    padding: 25px;
+    position: relative;
+}
+
+.intro-bubble p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Bubble cuối */
+.final-bubble {
+    max-width: 450px;
+    padding: 25px;
+}
+
+.final-bubble p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* ===== ĐIỀU KHIỂN HỘI THOẠI ===== */
+
+#current-dialogue {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#dialogue-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin: 0;
+    animation: dialogueAppear 0.5s ease-out;
+}
+
+.dialogue-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    margin: 0;
+}
+
+.next-btn {
+    background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(255, 107, 157, 0.3);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    background: linear-gradient(45deg, #ff8fab, #ff6b9d);
+}
+
+.next-btn:active {
+    transform: translateY(0);
+}
+
+.next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Bỏ counter */
+
+/* ===== PHẢN HỒI NGƯỜI CHƠI ===== */
+
+#player-response {
+    margin-top: 15px;
+    animation: slideInUp 0.5s ease-out;
+}
+
+.player-bubble {
+    background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+    padding: 15px 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+    position: relative;
+}
+
+.player-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #e3f2fd;
+}
+
+.player-bubble p {
+    margin: 0;
+    color: #1565c0;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.response-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.response-btn {
+    background: linear-gradient(45deg, #2196f3, #42a5f5);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.response-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+    background: linear-gradient(45deg, #42a5f5, #2196f3);
+}
+
+.response-btn:active {
+    transform: translateY(0);
+}
+
+.response-btn.selected {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    transform: scale(1.05);
+}
+
+@keyframes dialogueAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Câu hỏi */
+.question {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+    margin-bottom: 20px;
+    animation: slideInUp 0.8s ease-out;
+}
+
+.question.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.question h2 {
+    color: #d63384;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Nút lựa chọn */
+.options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.option-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    background: linear-gradient(45deg, #ff8fab, #ff6b9d);
+}
+
+.option-btn:active {
+    transform: translateY(0);
+}
+
+.option-btn.correct {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    animation: correctPulse 0.6s ease-out;
+}
+
+.option-btn.wrong {
+    background: linear-gradient(45deg, #f44336, #ef5350);
+    animation: wrongShake 0.6s ease-out;
+}
+
+.special-btn {
+    background: linear-gradient(45deg, #ff9800, #ffb74d);
+    font-size: 1.2rem;
+    padding: 20px 30px;
+    animation: specialGlow 2s ease-in-out infinite;
+}
+
+/* ===== LỰA CHỌN NHÂN VẬT ===== */
+
+#character-selection {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#character-selection h2 {
+    color: #d63384;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.character-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.character-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+}
+
+.character-card.selected {
+    background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+    color: white;
+    transform: scale(1.05);
+}
+
+.character-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #ff6b9d;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover .character-image {
+    border-color: #ff8fab;
+    transform: scale(1.1);
+}
+
+.character-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #d63384;
+    margin: 0;
+}
+
+.character-card.selected h3 {
+    color: white;
+}
+
+/* ===== TRÒ CHƠI ÂM NHẠC ===== */
+
+.music-question {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+    text-align: center;
+}
+
+.music-question h2 {
+    color: #d63384;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.music-question img {
+    max-width: 300px;
+    max-height: 200px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.music-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.music-option-btn {
+    background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.music-option-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    background: linear-gradient(45deg, #ff8fab, #ff6b9d);
+}
+
+.music-option-btn:active {
+    transform: translateY(0);
+}
+
+.music-option-btn.correct {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    animation: correctPulse 0.6s ease-out;
+}
+
+.music-option-btn.wrong {
+    background: linear-gradient(45deg, #f44336, #ef5350);
+    animation: wrongShake 0.6s ease-out;
+}
+
+/* ===== PHẦN 2: LỜI CHÚC ===== */
+
+#wish-section {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    color: #d63384;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+    animation: fadeInDown 1s ease-out;
+}
+
+.typing-text {
+    font-size: 1.8rem;
+    color: #e91e63;
+    margin-bottom: 50px;
+    font-weight: 500;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container hình ảnh */
+#images-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin: 40px 0;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+}
+
+.image-slide {
+    position: absolute;
+    object-fit: contain;
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    will-change: transform, opacity;
+}
+
+.image-slide.active {
+    opacity: 1;
+    animation: imageFloat 4s ease-in-out infinite, subtleShake 2.6s ease-in-out infinite;
+}
+
+.image-slide:hover {
+    transform: scale(1.1) rotate(var(--rotation, 0deg)) !important;
+    z-index: 10 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+@keyframes imageFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(var(--rotation, 0deg)) scale(var(--scale, 1));
+    }
+    25% {
+        transform: translateY(-8px) rotate(var(--rotation, 0deg)) scale(var(--scale, 1));
+    }
+    50% {
+        transform: translateY(-15px) rotate(var(--rotation, 0deg)) scale(var(--scale, 1));
+    }
+    75% {
+        transform: translateY(-8px) rotate(var(--rotation, 0deg)) scale(var(--scale, 1));
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 1;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) rotate(360deg);
+    }
+}
+
+/* ===== PART 3 CUTE OVERLAYS ===== */
+.vignette-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at center, rgba(255, 182, 193, 0.18), rgba(255, 182, 193, 0) 60%),
+        radial-gradient(ellipse at 20% 20%, rgba(255, 240, 245, 0.35), rgba(255, 240, 245, 0) 40%),
+        radial-gradient(ellipse at 80% 75%, rgba(255, 228, 225, 0.35), rgba(255, 228, 225, 0) 40%);
+    z-index: 600;
+}
+
+.kawaii-sticker {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.85;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.2));
+    will-change: transform, opacity;
+    animation: stickerDrift linear infinite;
+    z-index: 3000;
+}
+
+/* Hearts in final wish above slideshow */
+#floating-hearts-final {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+@keyframes stickerDrift {
+    0% {
+        transform: translate(var(--sx, 0), var(--sy, 0)) rotate(0deg) scale(1);
+        opacity: 0.0;
+    }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
+    100% {
+        transform: translate(calc(var(--sx, 0) + var(--dx, 0)), calc(var(--sy, 0) + var(--dy, -120vh))) rotate(360deg) scale(1.05);
+        opacity: 0.0;
+    }
+}
+
+.cute-glow {
+    text-shadow: 0 0 0 rgba(255,105,180,0.0);
+    animation: glowPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 0 rgba(255,105,180,0); }
+    50% { text-shadow: 0 0 30px rgba(255,105,180,0.65), 0 0 60px rgba(255,182,193,0.45); }
+}
+
+/* Make slideshow images glow softly while active */
+.image-slide.active {
+    animation: imageFloat 4s ease-in-out infinite, glowPulseSoft 3s ease-in-out infinite, subtleShake 2.6s ease-in-out infinite;
+}
+
+@keyframes glowPulseSoft {
+    0%, 100% { box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+    50% { box-shadow: 0 28px 75px rgba(255, 182, 193, 0.35); }
+}
+
+/* Lắc nhẹ để sinh động */
+@keyframes subtleShake {
+    0%   { transform: translate(-50%, -50%) rotate(calc(var(--tilt, 0deg) - 0.6deg)); }
+    25%  { transform: translate(calc(-50% - 2px), calc(-50% + 1px)) rotate(calc(var(--tilt, 0deg) + 0.4deg)); }
+    50%  { transform: translate(-50%, -50%) rotate(calc(var(--tilt, 0deg) + 0.6deg)); }
+    75%  { transform: translate(calc(-50% + 1px), calc(-50% - 1px)) rotate(calc(var(--tilt, 0deg) - 0.4deg)); }
+    100% { transform: translate(-50%, -50%) rotate(calc(var(--tilt, 0deg) - 0.6deg)); }
+}
+
+/* ===== Ending banner (Part 3) ===== */
+.ending-banner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(28px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 16px 28px;
+    border-radius: 20px;
+    color: #ff3b7a; /* tăng đậm màu chữ */
+    text-shadow: 0 2px 0 rgba(255,255,255,0.8), 0 10px 30px rgba(255, 107, 157, 0.45);
+    /* backup: nếu muốn gradient chữ, có thể bật 3 dòng dưới và set color: transparent */
+    /* background: linear-gradient(90deg, #ff3b7a, #ff6b9d, #ff8fab); */
+    /* -webkit-background-clip: text; */
+    /* background-clip: text; */
+    animation: bannerPop 0.8s ease-out forwards, bannerShine 3s linear infinite;
+    z-index: 4000; /* trên mọi hiệu ứng */
+    text-shadow: 0 6px 24px rgba(255, 107, 157, 0.35);
+}
+
+@keyframes bannerPop {
+    0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; filter: blur(6px); }
+    60% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; filter: blur(0px); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes bannerShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== HIỆU ỨNG TRÁI TIM ===== */
+
+.heart {
+    position: absolute;
+    color: #ff6b9d;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: heartFloat 4s linear infinite;
+    z-index: 1;
+}
+
+.heart:nth-child(odd) {
+    animation-delay: -2s;
+    color: #ff8fab;
+}
+
+.heart:nth-child(3n) {
+    animation-delay: -1s;
+    color: #f48fb1;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes specialGlow {
+    0%, 100% { box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3); }
+    50% { box-shadow: 0 5px 25px rgba(255, 152, 0, 0.6); }
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .typing-text {
+        font-size: 1.4rem;
+    }
+    
+    .options {
+        grid-template-columns: 1fr;
+    }
+    
+    .option-btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+    
+    .special-btn {
+        font-size: 1.1rem;
+        padding: 15px 25px;
+    }
+    
+    .speech-bubble {
+        padding: 15px;
+    }
+    
+    .speech-bubble p {
+        font-size: 1rem;
+    }
+    
+    #images-container {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.6rem;
+    }
+    
+    .typing-text {
+        font-size: 1.2rem;
+    }
+    
+    .pig-emoji {
+        font-size: 3rem;
+    }
+    
+    .question h2 {
+        font-size: 1.3rem;
+    }
+}
